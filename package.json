@@ -1,0 +1,15 @@
+{
+  "name": "scheduled-tasks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/leonhma/scheduled-tasks.git",
+  "author": "leonhma <67312077+leonhma@users.noreply.github.com>",
+  "license": "GPLV3",
+  "private": true,
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "node-cron": "^3.0.0",
+    "redis": "^4.1.0",
+    "yaml": "^2.0.1"
+  }
+}
