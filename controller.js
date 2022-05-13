@@ -8,7 +8,7 @@ const jobs = parse(readFileSync('./jobs.yml', 'utf8')).jobs;
 for (const [name, props] of Object.entries(jobs)) {
     console.log(`Scheduling job ${name}\n----------------------`);
     console.log(`props: ${JSON.stringify(props)}`);
-    if (props.daemon) {
+    if ("daemon" in props) {
         console.log('debug: found "daemon"');
         console.log(`Starting daemon '${props.daemon}'`);
         const d = spawn(props.daemon);
@@ -20,10 +20,10 @@ for (const [name, props] of Object.entries(jobs)) {
         });
         d.on('close', (code) => { console.log(`${name} exited with code ${code}`); });
     }
-    if (props.cron) { 
+    if ("cron" in props) { 
         console.log(`Scheduling '${props.command}' to run every ${props.cron}`);
         if (!validate(props.cron)) { console.log(`invalid cron expression ${props.cron}`); continue }
-        if (!props.command) { console.log(`no command specified`); continue }
+        if (!"command" in props) { console.log(`no command specified`); continue }
         schedule(props.cron, () => {
             const c = spawn(props.command);
             c.stdout.on('data', (data) => {
