@@ -1,7 +1,8 @@
-const { schedule, validate } = require("node-cron");
-const { parse } = require('yaml');
-const { readFileSync } = require('fs');
-const { spawn } = require("child_process");
+import cron from 'node-cron';
+const { schedule, validate } = cron;
+import { parse } from 'yaml';
+import { readFileSync } from 'fs';
+import { spawn } from "child_process";
 
 const jobs = parse(readFileSync('./jobs.yml', 'utf8')).jobs;
 

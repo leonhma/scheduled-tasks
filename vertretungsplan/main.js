@@ -1,9 +1,10 @@
 // import { config } from 'dotenv';
 // config();
-const { Client } = require('discord.js');
-const pptr = require('puppeteer');
-const { createClient } = require('redis');
-const { schedule, validate } = ('node-cron');
+import { Client } from 'discord.js';
+import pptr from 'puppeteer';
+import { createClient } from 'redis';
+import cron from 'node-cron';
+const { schedule, validate } = cron;
 
 console.log(`Started at ${new Date()}`);
 

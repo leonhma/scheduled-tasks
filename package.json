@@ -1,7 +1,7 @@
 {
   "name": "scheduled-tasks",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
   "repository": "https://github.com/leonhma/scheduled-tasks.git",
   "author": "leonhma <67312077+leonhma@users.noreply.github.com>",
   "license": "GPLV3",
