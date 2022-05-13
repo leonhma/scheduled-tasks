@@ -7,7 +7,7 @@ import { spawn } from "child_process";
 const jobs = parse(readFileSync('./jobs.yml', 'utf8')).jobs;
 
 const command = (cmd) => { 
-    const res = cmd.split('')
+    const res = cmd.split(' ')
     return [res[0], res.slice(1)]
 }
 
