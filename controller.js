@@ -3,7 +3,7 @@ const { parse } = require('yaml');
 const { readFileSync } = require('fs');
 const { spawn } = require("child_process");
 
-const jobs = parse(readFileSync('./jobs.yml', 'utf8'));
+const jobs = parse(readFileSync('./jobs.yml', 'utf8')).jobs;
 
 for (const [name, props] of Object.entries(jobs)) {
     console.log(`Scheduling job ${name}\n----------------------`);
