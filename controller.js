@@ -6,12 +6,18 @@ import { spawn } from "child_process";
 
 const jobs = parse(readFileSync('./jobs.yml', 'utf8')).jobs;
 
+const command = (cmd) => { 
+    const res = cmd.split('')
+    return res[0], res.slice(1)
+}
+
 for (const [name, props] of Object.entries(jobs)) {
     console.log(`Scheduling job ${name}\n----------------------`);
     console.log(`props: ${JSON.stringify(props)}`);
     if ("daemon" in props) {
         console.log(`Starting daemon '${props.daemon}'`);
-        const d = spawn(props.daemon);
+        const [cmd, args] = command(props.daemon)
+        const d = spawn(cmd, args);
         d.stdout.on('data', (data) => {
             console.log(`${name}: ${data}`);
         });
@@ -26,7 +32,8 @@ for (const [name, props] of Object.entries(jobs)) {
         if (!validate(props.cron)) { console.log(`invalid cron expression ${props.cron}`); continue }
         if (!"command" in props) { console.log(`no command specified`); continue }
         schedule(props.cron, () => {
-            const c = spawn(props.command);
+            const [cmd, args] = command(props.command)
+            const d = spawn(cmd, args);
             c.stdout.on('data', (data) => {
                 console.log(`${name}: ${data}`);
             });
