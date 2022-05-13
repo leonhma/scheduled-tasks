@@ -20,6 +20,7 @@ for (const [name, props] of Object.entries(jobs)) {
         });
         d.on('close', (code) => { console.log(`${name} exited with code ${code}`); });
     }
+    console.log('jhbsgjbdsk')
     if ("cron" in props) { 
         console.log(`Scheduling '${props.command}' to run every ${props.cron}`);
         if (!validate(props.cron)) { console.log(`invalid cron expression ${props.cron}`); continue }
