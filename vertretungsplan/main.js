@@ -10,7 +10,7 @@ console.log(`Started at ${new Date()}`);
 
 const discord = new Client({ intents: ["GUILDS", "GUILD_MESSAGES"] });
 
-const redis = createClient({ url: process.env.REDIS_URL });
+const redis = createClient({ url: process.env.VPLAN_REDIS_URL });
 await redis.connect();
 redis.on('error', (err) => console.log('Redis Client Error', err));
 
@@ -87,8 +87,8 @@ async function downloadVertretungsplan() {
     const page = await browser.newPage();
     await page.goto('https://emagyha.eltern-portal.org/service/vertretungsplan');
     // login
-    await page.type('#inputEmail', process.env.USER_EMAIL);
-    await page.type('#inputPassword', process.env.USER_PWD);
+    await page.type('#inputEmail', process.env.VPLAN_USER_EMAIL);
+    await page.type('#inputPassword', process.env.VPLAN_USER_PWD);
 
     await Promise.all([
         page.waitForNavigation({ waitUntil: 'networkidle0' }),
@@ -99,7 +99,7 @@ async function downloadVertretungsplan() {
         await fetch(`origin/set_child.php?id=${sid}`, {
             method: "POST",
         });
-    }, process.env.CHILD_SID);
+    }, process.env.VPLAN_CHILD_SID);
     await page.goto('https://emagyha.eltern-portal.org/service/vertretungsplan');
     // screenshot
     const table = await page.$('#asam_content > div.main_center');
@@ -144,4 +144,4 @@ function debug(msg) {
         console.log(`debug: ${msg}`)
     }
 }
-discord.login(process.env.DISCORD_TOKEN);
+discord.login(process.env.VPLAN_DISCORD_TOKEN);

@@ -1,3 +1,6 @@
 jobs:
   vertretungsplan:
     daemon: "node vertretungsplan/main.js"
+  hdfilme:
+    cron: 0 0 */2 * *
+    command: "node hdfilme/main.js"
