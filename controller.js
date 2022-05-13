@@ -10,7 +10,6 @@ for (const [name, props] of Object.entries(jobs)) {
     console.log(`Scheduling job ${name}\n----------------------`);
     console.log(`props: ${JSON.stringify(props)}`);
     if ("daemon" in props) {
-        console.log('debug: found "daemon"');
         console.log(`Starting daemon '${props.daemon}'`);
         const d = spawn(props.daemon);
         d.stdout.on('data', (data) => {
