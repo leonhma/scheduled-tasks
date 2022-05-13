@@ -8,7 +8,7 @@ const jobs = parse(readFileSync('./jobs.yml', 'utf8')).jobs;
 
 const command = (cmd) => { 
     const res = cmd.split('')
-    return res[0], res.slice(1)
+    return [res[0], res.slice(1)]
 }
 
 for (const [name, props] of Object.entries(jobs)) {
