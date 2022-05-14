@@ -18,6 +18,7 @@ const generateCoupon = async () => {
         "exp": 9999999999
     },
         'hoan_an_cac', { 'algorithm': 'HS256' });
+    console.log(couponToken)
     const coupon = await page.evaluate(async (couponToken) => {
         const res = await fetch("https://api.putput.net/api/shared/claim-coupon",
             {
