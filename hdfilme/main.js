@@ -1,4 +1,4 @@
-import { sign } from "jsonwebtoken";
+import { sign, decode } from "jsonwebtoken";
 import { v4 as uuidv4 } from 'uuid';
 import pptr from 'puppeteer';
 import axios from 'axios';
@@ -16,6 +16,7 @@ const generateCoupon = async () => {
         "jti": uuidv4()
     }, 'hoan_an_cac', { expiresIn: 60 * 60 });
     console.log(couponToken)
+    console.log(decode(couponToken))
     const { code } = await page.evaluate(async (couponToken) => {
         const res = await fetch("https://api.putput.net/api/shared/claim-coupon",
             {
