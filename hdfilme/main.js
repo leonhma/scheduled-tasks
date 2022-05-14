@@ -19,13 +19,11 @@ const generateCoupon = async () => {
     console.log(couponToken)
     console.log(decode(couponToken))
     const code = await page.evaluate((couponToken) => {
-        return window.location.href
         return fetch("https://api.putput.net/api/shared/claim-coupon",
             {
                 'method': 'POST',
                 'headers': {
                     'Content-Type': 'text/plain',
-                    'Accept': 'application/json'
                 },
                 'body': JSON.stringify({ 'couponToken': couponToken })
             });
