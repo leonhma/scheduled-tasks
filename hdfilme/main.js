@@ -36,11 +36,11 @@ await uploadScreenshot(putput)
 await putput.evaluate(_ => {
   document.querySelector('article[data-key="9"]').scrollIntoView()
 });
-await putput.waitForTimeout(200);
+await putput.waitForTimeout(1000);
 await uploadScreenshot(putput)
 await putput.click('#core-view > div > div.pp-section-list-container > div.gift-box > div > div > div.v-responsive__content')
-
-await Promise.all(
+await uploadScreenshot(putput)
+await Promise.all([
   putput.waitForTimeout(120000),
   async () => {
       await hdfilme.goto('https://hdfilme.tv/login/');
@@ -48,7 +48,7 @@ await Promise.all(
       await hdfilme.type('#password', process.env.HDFILME_USER_PWD);
       await hdfilme.click('button[type=submit]')
       await hdfilme.waitForNavigation({ waitUntil: 'networkidle0' })
-  })
+  }])
                   
 await uploadScreenshot(hdfilme)
 
