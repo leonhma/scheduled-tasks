@@ -1,6 +1,7 @@
 import pptr from 'puppeteer';
 import axios from 'axios';
 
+
 const uploadScreenshot  = async (page) => {
   await axios({
     method: 'post',
@@ -16,13 +17,17 @@ const uploadScreenshot  = async (page) => {
   });
 }
 
-
 const browser = await pptr.launch({ args: ['--no-sandbox'] });
 const context = browser.defaultBrowserContext();
 await context.overridePermissions('https://putput.net/', ['clipboard-read'])
 
 const hdfilme = await browser.newPage();
 const putput = await browser.newPage();
+await putput.setRequestInterception(true)
+
+putput.on('request', request => { 
+  console.log(`Intercepted ${request.method()} request: url=${request.url()} referrer=${request.referrer}`)
+})
 
 await putput.goto('https://putput.net/lustig', { 'referrer': 'https://www.google.com/' });
 await putput.waitForTimeout(1000);
@@ -30,8 +35,8 @@ await uploadScreenshot(putput)
 await putput.evaluate(_ => {
   document.querySelector('article[data-key="9"]').scrollIntoView()
 });
-await uploadScreenshot(putput)
 await putput.waitForTimeout(200);
+await uploadScreenshot(putput)
 await putput.click('#core-view > div > div.pp-section-list-container > div.gift-box > div > div > div.v-responsive__content')
 
 await Promise.all(
