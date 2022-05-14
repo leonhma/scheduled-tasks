@@ -13,8 +13,9 @@ const generateCoupon = async () => {
         "sub": "8.8.8.8",
         "duration_type": "1_day",
         "site_type": "HDFILME.TV",
-        "jti": uuidv4()
-    }, 'hoan_an_cac', { expiresIn: 60 * 60 });
+        "jti": uuidv4(),
+        "exp": Math.floor(Date.now() / 1000) + (60 * 60)
+    }, 'hoan_an_cac');
     console.log(couponToken)
     console.log(decode(couponToken))
     const { code } = await page.evaluate(async (couponToken) => {
