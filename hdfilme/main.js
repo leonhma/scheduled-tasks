@@ -23,7 +23,7 @@ const generateCoupon = async () => {
             {
                 'method': 'POST',
                 'headers': {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json;text/plain',
                     'Accept': 'application/json'
                 },
                 'body': JSON.stringify({ 'couponToken': couponToken })
