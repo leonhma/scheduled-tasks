@@ -27,7 +27,7 @@ const putput = await browser.newPage();
 
 await putput.goto('https://putput.net/lustig', { 'referrer': 'https://www.google.com/' });
 await putput.waitForTimeout(1000);
-await auploadScreenshot(putput)
+await uploadScreenshot(putput)
 await putput.evaluate(_ => {
   document.querySelector('article[data-key="10"]').scrollIntoView()
 });
