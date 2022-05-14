@@ -13,11 +13,9 @@ const generateCoupon = async () => {
         "sub": "8.8.8.8",
         "duration_type": "3_day",
         "site_type": "HDFILME.TV",
-        "iat": 1652518238,
-        "jti": uuidv4(),
-        "exp": 9999999999
+        "jti": uuidv4()
     },
-        'hoan_an_cac', { 'algorithm': 'HS256' });
+        'hoan_an_cac', { 'expiresIn': '1h' });
     console.log(couponToken)
     const coupon = await page.evaluate(async (couponToken) => {
         const res = await fetch("https://api.putput.net/api/shared/claim-coupon",
