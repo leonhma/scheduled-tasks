@@ -41,13 +41,15 @@ await uploadScreenshot(putput)
 
 await putput.click('#core-view > div > div.pp-section-list-container > div.gift-box > div > div.gift-box-body > div > div.gift-box-types > div:nth-child(2) > div.v-image.v-responsive.theme--light > div.v-responsive__content')
 await putput.waitForTimeout(200)
+await uploadScreenshot(putput)
 await putput.click('input[value="hdfilme.tv"]+div.v-input--selection-controls__ripple')
 await putput.waitForTimeout(200)
+await uploadScreenshot(putput)
 await putput.click('button.gift-box-choose')
 await putput.waitForTimeout(200);
+await uploadScreenshot(putput)
 await putput.click('input#coupon-code')
 await putput.waitForTimeout(200);
-
 await uploadScreenshot(putput)
 
 const couponCode = await page.evaluate(`(async () => await navigator.clipboard.readText())()`)
