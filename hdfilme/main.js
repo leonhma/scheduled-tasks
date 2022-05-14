@@ -9,7 +9,6 @@ const uploadScreenshot  = async (page) => {
     headers: {'Authorization': 'Bearer public_kW15arLAYiQwywpdkFyagRxWLrKr', 'Content-Type': 'image/png'}
   })
   .then(res => {
-    console.log(res);
     console.log(`uploaded screenshot to ${res.data.fileUrl}`);
   })
   .catch(error => {
