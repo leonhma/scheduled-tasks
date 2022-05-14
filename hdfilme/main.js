@@ -23,12 +23,6 @@ await context.overridePermissions('https://putput.net/', ['clipboard-read'])
 
 const hdfilme = await browser.newPage();
 const putput = await browser.newPage();
-await putput.setRequestInterception(true)
-
-putput.on('request', request => { 
-  console.log(`Intercepted ${request.method()} request: url=${request.url()} referer=${request.headers()['referer']}`)
-  request.continue()
-})
 
 await putput.goto('https://putput.net/lustig', { 'referer': 'https://www.google.com/' });
 await putput.waitForTimeout(1000);
@@ -45,6 +39,8 @@ await Promise.all([
   putput.waitForTimeout(125000),
   (async function () {
     await hdfilme.goto('https://hdfilme.tv/login/');
+    await hdfilme.waitForTimeout(1000);
+    await uploadScreenshot(hdfilme)
     await hdfilme.type('#email', process.env.HDFILME_USER_EMAIL);
     await hdfilme.type('#password', process.env.HDFILME_USER_PWD);
     await uploadScreenshot(hdfilme)
