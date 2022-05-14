@@ -27,23 +27,26 @@ const putput = await browser.newPage();
 
 await putput.goto('https://putput.net/lustig', { 'referrer': 'https://www.google.com/' });
 await putput.waitForTimeout(1000);
-uploadScreenshot(putput)
+await auploadScreenshot(putput)
 await putput.evaluate(_ => {
   document.querySelector('article[data-key="10"]').scrollIntoView()
 });
-uploadScreenshot(putput)
+await uploadScreenshot(putput)
 await putput.waitForTimeout(200);
 await putput.click('#core-view > div > div.pp-section-list-container > div.gift-box > div > div > div.v-responsive__content')
 
-await Promise.all(putput.waitForTimeout(120000),
-                  async () => {
-                      await hdfilme.goto('https://hdfilme.tv/login/');
-                      await hdfilme.type('#email', process.env.HDFILME_USER_EMAIL);
-                      await hdfilme.type('#password', process.env.HDFILME_USER_PWD);
-                      await hdfilme.click('button[type=submit]')
-                      await hdfilme.waitForNavigation({ waitUntil: 'networkidle0' })
-                  })
-uploadScreenshot(hdfilme)
+await Promise.all(
+  putput.waitForTimeout(120000),
+  async () => {
+      await hdfilme.goto('https://hdfilme.tv/login/');
+      await hdfilme.type('#email', process.env.HDFILME_USER_EMAIL);
+      await hdfilme.type('#password', process.env.HDFILME_USER_PWD);
+      await hdfilme.click('button[type=submit]')
+      await hdfilme.waitForNavigation({ waitUntil: 'networkidle0' })
+  })
+                  
+await uploadScreenshot(hdfilme)
+
 await putput.click('#core-view > div > div.pp-section-list-container > div.gift-box > div > div.gift-box-body > div > div.gift-box-types > div:nth-child(2) > div.v-image.v-responsive.theme--light > div.v-responsive__content')
 await putput.waitForTimeout(200)
 await putput.click('input[value="hdfilme.tv"]+div.v-input--selection-controls__ripple')
@@ -52,13 +55,19 @@ await putput.click('button.gift-box-choose')
 await putput.waitForTimeout(200);
 await putput.click('input#coupon-code')
 await putput.waitForTimeout(200);
-uploadScreenshot(putput)
+
+await uploadScreenshot(putput)
+
 const couponCode = await page.evaluate(`(async () => await navigator.clipboard.readText())()`)
 
 await hdfilme.goto('https://hdfilme.tv/submit-coupon/')
 await hdfilme.type('input#coupon_code', couponCode)
-uploadScreenshot(hdfilme)
+
+await uploadScreenshot(hdfilme)
+
 await hdfilme.click('button[type=submit]')
-uploadScreenshot(hdfilme)
+
+await uploadScreenshot(hdfilme)
+
 await hdfilme.waitForTimeout(2000)
 
