@@ -19,6 +19,7 @@ const generateCoupon = async () => {
     console.log(couponToken)
     console.log(decode(couponToken))
     const code = await page.evaluate((couponToken) => {
+        return window.location.href
         return fetch("https://api.putput.net/api/shared/claim-coupon",
             {
                 'method': 'POST',
@@ -34,5 +35,5 @@ const generateCoupon = async () => {
 }
 
 const coupon = await generateCoupon()
-console.log(typeof coupon)
+console.log(coupon)
 console.log(`${coupon.headers}, ${coupon.data}, ${coupon.status}`)
