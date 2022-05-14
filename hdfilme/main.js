@@ -11,7 +11,7 @@ const generateCoupon = async () => {
     await page.goto('https://putput.net/');
     const couponToken = sign({
         "sub": "8.8.8.8",
-        "duration_type": "2_day",
+        "duration_type": "3_day",
         "site_type": "HDFILME.TV",
         "iat": 1652518238,
         "jti": uuidv4(),
