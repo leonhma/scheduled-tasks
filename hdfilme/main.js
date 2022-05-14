@@ -26,7 +26,7 @@ const putput = await browser.newPage();
 await putput.setRequestInterception(true)
 
 putput.on('request', request => { 
-  console.log(`Intercepted ${request.method()} request: url=${request.url()} referrer=${request.referer}`)
+  console.log(`Intercepted ${request.method()} request: url=${request.url()} referer=${request.headers()['referer']}`)
   request.continue()
 })
 
