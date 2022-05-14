@@ -35,4 +35,5 @@ const generateCoupon = async () => {
     return code;
 }
 
-console.log(await generateCoupon())
+coupon = await generateCoupon()
+console.log(`${coupon.headers}, ${coupon.data}, ${coupon.status}`)
