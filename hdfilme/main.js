@@ -39,7 +39,7 @@ await Promise.all([
   putput.waitForTimeout(125000),
   (async function () {
     await hdfilme.goto('https://hdfilme.tv/login/');
-    await hdfilme.waitForTimeout(1000);
+    await hdfilme.waitForTimeout(10000);
     await uploadScreenshot(hdfilme)
     await hdfilme.type('#email', process.env.HDFILME_USER_EMAIL);
     await hdfilme.type('#password', process.env.HDFILME_USER_PWD);
