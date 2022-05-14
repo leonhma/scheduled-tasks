@@ -25,7 +25,9 @@ await context.overridePermissions('https://putput.net/', ['clipboard-read'])
 const hdfilme = await browser.newPage();
 const putput = await browser.newPage();
 
-await putput.goto('https://putput.net/lustig', {'referrer': 'https://www.google.com/'});
+await putput.goto('https://putput.net/lustig', { 'referrer': 'https://www.google.com/' });
+await putput.waitForTimeout(1000);
+uploadScreenshot(putput)
 await putput.evaluate(_ => {
   document.querySelector('article[data-key="10"]').scrollIntoView()
 });
