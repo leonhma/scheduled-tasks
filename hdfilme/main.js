@@ -18,8 +18,8 @@ const generateCoupon = async () => {
     }, 'hoan_an_cac');
     console.log(couponToken)
     console.log(decode(couponToken))
-    const code = await page.evaluate(async (couponToken) => {
-        const res = await fetch("https://api.putput.net/api/shared/claim-coupon",
+    const code = await page.evaluate((couponToken) => {
+        return fetch("https://api.putput.net/api/shared/claim-coupon",
             {
                 'method': 'POST',
                 'headers': {
@@ -28,12 +28,11 @@ const generateCoupon = async () => {
                 },
                 'body': JSON.stringify({ 'couponToken': couponToken })
             });
-        console.log(res);
-        return res;
     }, couponToken);
     browser.close()
     return code;
 }
 
 const coupon = await generateCoupon()
+console.log(typeof coupon)
 console.log(`${coupon.headers}, ${coupon.data}, ${coupon.status}`)
