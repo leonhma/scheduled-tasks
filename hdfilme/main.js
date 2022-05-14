@@ -10,7 +10,7 @@ const putput = await browser.newPage();
 
 await putput.goto('https://putput.net/lustig', {'referrer': 'https://www.google.com/'});
 await putput.evaluate(_ => {
-  window.scrollIntoViewIfNeeded('article[data-key="9"]')
+  document.querySelector('article[data-key="10"]').scrollIntoView()
 });
 await putput.waitForTimeout(200);
 await putput.click('#core-view > div > div.pp-section-list-container > div.gift-box > div > div > div.v-responsive__content')
