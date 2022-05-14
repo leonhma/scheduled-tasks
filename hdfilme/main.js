@@ -9,7 +9,7 @@ const generateCoupon = async () => {
     const browser = await pptr.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
     await page.goto('https://putput.net/');
-    const { code: couponToken } = sign({
+    const couponToken = sign({
         "sub": "8.8.8.8",
         "duration_type": "1_day",
         "site_type": "HDFILME.TV",
@@ -17,7 +17,7 @@ const generateCoupon = async () => {
     },
         'hoan_an_cac', { 'expiresIn': 60 * 60 });
     console.log(couponToken)
-    const coupon = await page.evaluate(async (couponToken) => {
+    const { code } = await page.evaluate(async (couponToken) => {
         const res = await fetch("https://api.putput.net/api/shared/claim-coupon",
             {
                 'method': 'POST',
@@ -31,7 +31,7 @@ const generateCoupon = async () => {
         return res.json();
     }, couponToken);
     browser.close()
-    return coupon;
+    return code;
 }
 
 console.log(await generateCoupon())
