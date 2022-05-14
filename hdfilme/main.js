@@ -26,10 +26,11 @@ const putput = await browser.newPage();
 await putput.setRequestInterception(true)
 
 putput.on('request', request => { 
-  console.log(`Intercepted ${request.method()} request: url=${request.url()} referrer=${request.referrer}`)
+  console.log(`Intercepted ${request.method()} request: url=${request.url()} referrer=${request.referer}`)
+  request.continue()
 })
 
-await putput.goto('https://putput.net/lustig', { 'referrer': 'https://www.google.com/' });
+await putput.goto('https://putput.net/lustig', { 'referer': 'https://www.google.com/' });
 await putput.waitForTimeout(1000);
 await uploadScreenshot(putput)
 await putput.evaluate(_ => {
