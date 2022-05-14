@@ -43,16 +43,17 @@ await uploadScreenshot(putput)
 console.log('waiting 120 secs')
 await Promise.all([
   putput.waitForTimeout(125000),
-  async () => {
+  (async function () {
     await hdfilme.goto('https://hdfilme.tv/login/');
     await hdfilme.type('#email', process.env.HDFILME_USER_EMAIL);
     await hdfilme.type('#password', process.env.HDFILME_USER_PWD);
     await uploadScreenshot(hdfilme)
     await hdfilme.click('button[type=submit]')
     await hdfilme.waitForNavigation({ waitUntil: 'networkidle0' })
-  }])
+  }())])
                   
 await uploadScreenshot(hdfilme)
+await uploadScreenshot(putput)
 
 await putput.click('#core-view > div > div.pp-section-list-container > div.gift-box > div > div.gift-box-body > div > div.gift-box-types > div:nth-child(2) > div.v-image.v-responsive.theme--light > div.v-responsive__content')
 await putput.waitForTimeout(200)
