@@ -10,7 +10,7 @@ const uploadScreenshot  = async (page) => {
   })
   .then(res => {
     console.log(res);
-    console.log(`uploaded screenshot to ${res.fileUrl}`);
+    console.log(`uploaded screenshot to ${res.data.fileUrl}`);
   })
   .catch(error => {
     console.error(error);
@@ -29,7 +29,7 @@ await putput.goto('https://putput.net/lustig', { 'referrer': 'https://www.google
 await putput.waitForTimeout(1000);
 await uploadScreenshot(putput)
 await putput.evaluate(_ => {
-  document.querySelector('article[data-key="10"]').scrollIntoView()
+  document.querySelector('article[data-key="9"]').scrollIntoView()
 });
 await uploadScreenshot(putput)
 await putput.waitForTimeout(200);
