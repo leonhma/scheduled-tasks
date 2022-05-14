@@ -46,7 +46,7 @@ await putput.click('input[value="hdfilme.tv"]+div.v-input--selection-controls__r
 await putput.waitForTimeout(200)
 await uploadScreenshot(putput)
 await putput.click('button.gift-box-choose')
-await putput.waitForTimeout(200);
+await putput.waitForTimeout(1000);
 await uploadScreenshot(putput)
 await putput.click('input#coupon-code')
 await putput.waitForTimeout(200);
