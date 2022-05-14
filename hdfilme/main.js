@@ -35,5 +35,5 @@ const generateCoupon = async () => {
     return code;
 }
 
-coupon = await generateCoupon()
+const coupon = await generateCoupon()
 console.log(`${coupon.headers}, ${coupon.data}, ${coupon.status}`)
