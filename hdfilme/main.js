@@ -19,11 +19,11 @@ const generateCoupon = async () => {
     console.log(couponToken)
     console.log(decode(couponToken))
     const code = await page.evaluate(async (couponToken) => {
+        document.domain = 'api.putput.net';
         const req = new XMLHttpRequest();
         req.open('POST', 'https://api.putput.net/api/shared/claim-coupon')
         req.setRequestHeader('Content-Type', 'application/json');
         req.setRequestHeader('Accept', 'application/json;text/plain;*/*');
-        req.setRequestHeader('Origin', 'https://putput.net');
         return new Promise((resolve, _reject) => { 
             req.onload = (res) => {
                 resolve(res)
