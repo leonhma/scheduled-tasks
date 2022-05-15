@@ -20,16 +20,15 @@ const generateCoupon = async () => {
     console.log(decode(couponToken))
     const code = await page.evaluate(async (couponToken) => {
         const req = new XMLHttpRequest();
-        req.open('POST', 'https://api.putput.net/api/shared/claim-coupon', true)
+        req.open('POST', 'https://api.putput.net/api/shared/claim-coupon' )
         req.setRequestHeader('Content-Type', 'text/plain');
         req.setRequestHeader('Accept', 'application/json;text/plain;*/*');
         return new Promise((resolve, _reject) => {
             req.onreadystatechange = () => {
-                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                if (this.readyState === 4 && this.status === 200) {
                     resolve(this)
                 }
             }
-            console.log('sent')
             req.send(JSON.stringify({ 'couponToken': couponToken }));
         })
     }, couponToken);
