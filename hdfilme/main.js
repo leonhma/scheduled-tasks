@@ -8,6 +8,14 @@ const generateCoupon = async () => {
     // Launch headless Chrome.
     const browser = await pptr.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
+    // debug
+    page.on('console', async (msg) => {
+        const msgArgs = msg.args();
+        for (let i = 0; i < msgArgs.length; ++i) {
+            console.log(await msgArgs[i].jsonValue());
+        }
+    });
+
     await page.goto('https://putput.net/');
     const couponToken = sign({
         "sub": "8.8.8.8",
@@ -21,7 +29,8 @@ const generateCoupon = async () => {
     const code = await page.evaluate(async (couponToken) => {
         return new Promise((resolve, _reject) => {
             const req = new XMLHttpRequest();
-            req.onreadystatechange = _ => {
+            req.onreadystatechange = function (e) {
+                console.log(req.readyState, req.status, e);
                 if (this.readyState === XMLHttpRequest.DONE) {
                     resolve(this.response)
                 }
