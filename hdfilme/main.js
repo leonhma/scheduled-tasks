@@ -28,9 +28,9 @@ const generateCoupon = async () => {
                 if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
                     resolve(this)
                 }
-                console.log('sent')
-                req.send(JSON.stringify({ 'couponToken': couponToken }));
             }
+            console.log('sent')
+            req.send(JSON.stringify({ 'couponToken': couponToken }));
         })
     }, couponToken);
     browser.close()
