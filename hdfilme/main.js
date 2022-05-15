@@ -24,8 +24,8 @@ const generateCoupon = async () => {
         req.setRequestHeader('Content-Type', 'text/plain');
         req.setRequestHeader('Accept', 'application/json;text/plain;*/*');
         return new Promise((resolve, _reject) => {
-            req.onreadystatechange = () => {
-                if (this.readyState === 4) {
+            req.onreadystatechange = function() {
+                if (true) {
                     resolve(this)
                 }
             }
